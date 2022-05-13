@@ -4,6 +4,8 @@ import Datos.BuscaDatos;
 
 import java.util.Arrays;
 import java.util.Date;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class QuickSortTest {
 
@@ -21,18 +23,19 @@ public class QuickSortTest {
     }
 
     public static void ordenarArregloNumeros(Integer[] arreglo){
-        Integer[] arregloCopy = arreglo.clone();
-        Integer[] arregloCopy2 = arreglo.clone();
-        Integer[] arregloCopy3 = arreglo.clone();
-        int[] arregloCopy4 = new int[arreglo.length];
-        int j = 0;
-        for(Integer i : arreglo){
-            arregloCopy4[j++] = i.intValue();
-        }
+        //Dependencia que se inyecta a los metodos
         Sorting sorting = new Sorting<Integer>();
+
+        ordenarPorQuicksort(arreglo.clone(),sorting);
+        ordenarPorSelect(arreglo.clone(),sorting);
+        ordenarPorInsercion( arreglo.clone(), sorting);
+        ordenarPorMerge(arreglo.clone(),sorting);
+        //Se transforma de un arreglo de Integers a arreglo de ints
+        ordenarPorCounting(Arrays.stream(arreglo.clone()).mapToInt(i -> i.intValue()).toArray(), sorting);
+    }
+
+    private static void ordenarPorQuicksort(Comparable[] arreglo,Sorting sorting){
         Long tiempoInicial, tiempoFinal;
-
-
         System.out.println(Arrays.toString(arreglo));
         System.out.println("-----------------");
         tiempoInicial = new Date().getTime();
@@ -40,47 +43,58 @@ public class QuickSortTest {
         tiempoFinal = new Date().getTime();
         System.out.println(Arrays.toString(arreglo));
         System.out.println("Quicksort Tiempo en milisegundos: "+ (tiempoFinal-tiempoInicial));
+    }
 
+    private static void ordenarPorSelect(Comparable[] arreglo,Sorting sorting){
+        Long tiempoInicial, tiempoFinal;
         System.out.println("\n\n\n");
-
-        System.out.println(Arrays.toString(arregloCopy));
+        System.out.println(Arrays.toString(arreglo));
         System.out.println("-----------------");
         tiempoInicial = new Date().getTime();
-        sorting.ordenarPorSeleccion(arregloCopy);
+        sorting.ordenarPorSeleccion(arreglo);
         tiempoFinal = new Date().getTime();
-        System.out.println(Arrays.toString(arregloCopy));
+        System.out.println(Arrays.toString(arreglo));
         System.out.println("Selectsort Tiempo en milisegundos: "+ (tiempoFinal-tiempoInicial));
+    }
 
+    private static void ordenarPorInsercion(Comparable[] arreglo,Sorting sorting){
+        Long tiempoInicial, tiempoFinal;
         System.out.println("\n\n\n");
-
-        System.out.println(Arrays.toString(arregloCopy2));
+        System.out.println(Arrays.toString(arreglo));
         System.out.println("-----------------");
         tiempoInicial = new Date().getTime();
-        sorting.ordenarPorInsercion(arregloCopy2);
+        sorting.ordenarPorInsercion(arreglo);
         tiempoFinal = new Date().getTime();
-        System.out.println(Arrays.toString(arregloCopy2));
+        System.out.println(Arrays.toString(arreglo));
         System.out.println("Insercion Tiempo en milisegundos: "+ (tiempoFinal-tiempoInicial));
+    }
 
+
+    private static void ordenarPorMerge(Comparable[] arreglo, Sorting sorting){
+        Long tiempoInicial, tiempoFinal;
         System.out.println("\n\n\n");
-
-        System.out.println(Arrays.toString(arregloCopy3));
+        System.out.println(Arrays.toString(arreglo));
         System.out.println("-----------------");
         tiempoInicial = new Date().getTime();
-        sorting.ordenarPorMergeSort(arregloCopy3);
+        sorting.ordenarPorMergeSort(arreglo);
         tiempoFinal = new Date().getTime();
-        System.out.println(Arrays.toString(arregloCopy3));
+        System.out.println(Arrays.toString(arreglo));
         System.out.println("MergeSort Tiempo en milisegundos: "+ (tiempoFinal-tiempoInicial));
+    }
 
+
+    private static void ordenarPorCounting(int[] arreglo,Sorting sorting){
+        Long tiempoInicial, tiempoFinal;
         System.out.println("\n\n\n");
-
-        System.out.println(Arrays.toString(arregloCopy4));
+        System.out.println(Arrays.toString(arreglo));
         System.out.println("-----------------");
         tiempoInicial = new Date().getTime();
-        sorting.ordenarPorCountingSort(arregloCopy4);
+        sorting.ordenarPorCountingSort(arreglo);
         tiempoFinal = new Date().getTime();
-        System.out.println(Arrays.toString(arregloCopy4));
+        System.out.println(Arrays.toString(arreglo));
         System.out.println("CountingSort Tiempo en milisegundos: "+ (tiempoFinal-tiempoInicial));
     }
+
     public static void ordenaArregloArticulos(Articulo[] articulos){
         Sorting sorting = new Sorting<Articulo>();
         for(Articulo a : articulos){
