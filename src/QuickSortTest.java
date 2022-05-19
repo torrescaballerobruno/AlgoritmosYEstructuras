@@ -30,8 +30,9 @@ public class QuickSortTest {
         ordenarPorSelect(arreglo.clone(),sorting);
         ordenarPorInsercion( arreglo.clone(), sorting);
         ordenarPorMerge(arreglo.clone(),sorting);
-        //Se transforma de un arreglo de Integers a arreglo de ints
-        ordenarPorCounting(Arrays.stream(arreglo.clone()).mapToInt(i -> i.intValue()).toArray(), sorting);
+        //Se transforma de un arreglo de Integers a arreglo de ints de 2 maneras distintas
+        //ordenarPorCounting(Arrays.stream(arreglo.clone()).mapToInt(i -> i.intValue()).toArray(), sorting);
+        ordenarPorCounting(Arrays.stream(arreglo.clone()).mapToInt(Integer::intValue).toArray(), sorting);
     }
 
     private static void ordenarPorQuicksort(Comparable[] arreglo,Sorting sorting){

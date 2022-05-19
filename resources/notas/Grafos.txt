@@ -1,0 +1,190 @@
+Concepto de GRados y sus Elementos
+
+    Grafos son parejas de conjuntos (U,V) donde U es un conjunto de vertices y V es un conjunto de aristas (parejas no ordenadas)
+    Viendolo de forma grafica un vertice es un punto y una arista es una linea que une 2 puntos
+
+    Ejemplo U = {1,2,3,4,5}, V = {(1,3), (1,2),(2,3),(2,5),(5,4),(4,3)}
+            //aristas tambien se puede escribir asi V= {13,12,23,25,54,43}
+            // para los demas ejemplos se remmplaza     a ,b ,c ,d ,e ,f
+            // el vertice con letras para mas facil
+
+    Definiciones:
+        Orden -> Cantidad de vertices   n= 5
+        Tamaño -> Cantidad de aristas   m=6
+        Grados -> veces que se usa el vertice g(2) = 3
+        adyacencia -> un vertice es adyacente a otro si hay una arista que los una  -> 1 y 3 son adyacentes
+        incidendia -> una arista es incidente a los 2 vertices que une -> (1,3) es incidente a 1 y a 3
+
+Matriz de Adyacencia (MA)
+
+    filas y columnas son los vertices, se rellena con 0 y 1
+       0 -> si no es adyacente
+       1 -> si es adyacente con el otro vertice
+
+               1 2 3 4 5                Propiedades de la Matriz de Adyacencia
+            1| 0 1 1 0 0 |              -> matriz n x n cuadrada
+            2| 1 0 1 0 1 |              -> matriz binaria solo ceros y 1
+            3| 1 1 0 0 0 |              -> matriz MA es simetica (matriz traspuesta es identica a la original)
+            4| 0 0 1 0 1 |              -> diagonal principal esta completa de ceros
+            5| 0 1 0 1 0 |              -> suma de la fila i es el grado del vertice Xi
+
+Matriz de Incidencia
+
+    filas son los vertices y las columnas son los vertices -> ahora el tamaño es nxm no siempre va a ser cuadrada
+    se llena con 0 y 1,  1 si la arista incide en el vertice, y 0 si no lo hace
+
+            a b c d e f                 Propiedades de la Matriz de Incidencia
+        1 | 1 1 0 0 0 0 |               -> matriz es binaria
+        2 | 0 1 1 1 0 0 |               -> en general no es cuadrada ni simetrica
+        3 | 1 0 1 0 0 1 |               -> cada columna tiene tiene 2 unos(1), una arista solo uno 2 vertices no mas ni menos
+        4 | 0 0 0 0 1 1 |               -> la fila de Xi tiene grado de la cantidad de unos que hay
+        5 | 0 0 0 1 1 0 |
+
+Listas de Incidencia
+
+    V = {X1,X2,...,Xn} n = orden
+    i= 1,....,n         Xi = u1,u2,..., u(gXi)
+
+                | 1: 13,12
+                | 2: 12,23,25
+            LI  | 3: 13,23,43
+                | 4: 54,43
+                | 5: 54,25
+
+Propiedades Elementales
+
+    G(V,A)   Orden de G = |V| = n
+             Tamaño de G = |A| = m
+
+        1)  0 <= m <= n(n-1)/2
+
+            defs | m = 0 -> grafo nulo
+                 | m = n(n-1)/2 -> grafo completo, maximo numero de aristas
+
+        2) G de orden n ->  0 <= g(u) <= n-1
+
+Grados de un Grafo
+
+    sea G = (U,V)  de orden n y tamaño m
+    grado de V, g(v), el numero de aristas incidentes a v
+
+    grado minimo de G, d(G)  (delta), min grado de los vertices
+    ver cual vertice tiene menor grado (participacion en menos aristas)
+
+    grado maximo de G , A(G) (triangulo en ludar de A), maximo grado de los vertices
+    ver cual vertice tiene mayor grado (participacion en mas aristas)
+
+    Grafo regular: cumple la igualdad de d(G) = A(G), minimo y maximo grado de G
+    todos los vertices tienen el mismo grado (por ejemplo una figura geometrica, triangulo, cuadrado, pentagono, todos los vertices tienen 2 aristas)
+    grafo r-regular  (grafo 2-regular, grafo 3-regular)
+
+Lema de las Encajadas
+
+    "La suma de todos los grados es en un grafo G, es 2 veces el numero de aristas"
+
+    sum g(v) = 2m  v E V
+    Un grafo es r-regular si G(V,A)  g(v) = r para todo v E V
+    1-regulares
+    2-regulares
+    3-regulares
+    ....
+    n-regulares
+
+Grafos r-regulares
+
+    g(v) = r para todo v perteneciente a V
+
+    Ejemplos:  0-regular     G({1,2,3},{}) (Grafo nulos)  N3
+               1-regular     G({1,2,3},{12,23})(Grafos Trayecto) T3
+               2-regular     G({1,2,3},{12,23,31}) (Grafos Ciclos) C3
+               3-regular     puede ser un cubo
+
+
+    r * n = 2 * m
+        si un grafo regular tiene 12 vertices y es grado 4
+    s = (r*n)/2 = (4*12)/2 = 24
+
+Teorema de Havel-Hakimi
+
+    preposicion: En todo grafo  hay 2 vertices, al menos, con el mismo grado.
+    Demostracion por reduccion al absurdo: se supone lo contrario y se llega a una contradiccion
+
+Lema de Vertices
+
+    El numero de vertices de grado impar es par
+
+Tipos de Grafos
+
+    Grafo Nulo ->  Nn orden n, tamaño 0, todos los grados son 0, no tienen aristas
+
+    Grafo Completo -> Kn  orden n, tamaño m = n(n-1)/2
+
+    Grafo Ciclo -> Cn  orden n, (n>=3) -> poligonos  {x1,x2,...,xn-1, xn, x1}
+
+    Grafo Trayecto -> Tn orden n {x1,x2,...,xn-1, xn}
+
+    Grafos Rueda -> Wn orden n como grafo ciclo, pero con un vertice en medio
+
+Grafos Bipartitos
+
+    G(V,A)  es bipartito <=> V se puede expresar:
+                V = v1 U v2,                                        Es decir:  u,v E V1 => u no es adyacente de v
+                V1 y V2 no es nulo,                                            u,v E V2 => u no es adyacente de v
+                y la interseccion entre V1 y V2 es nulo
+
+        los vertices de V1, solo tiene adyacencia con los vertice de V2, si lo tienen, ya no son bipartitos
+        "Todos los vertices que no son pares no son adyacentes"
+
+Grafos Bipartitos Completos
+
+    Kr,s = (V,A), |V1|=r  |V2|=s
+        -> Todos los vertices de V1 son adyacentes a todos los vertices de V2
+                Orden de G = r + s
+                Tamaño de G= r * s
+
+Isomorfismo
+
+    Sean G=(V,A) y H(V',A')
+    G y H son iguales, G = H <=> V=V' y A=A'
+
+    G y H son isomorfos si existe una aplicacion biyectiva f: V -> V'
+    tal que para todo u y v: u es adyacente a v, tambien lo sera su imagen en H
+                             u no es adyacente a v, tampoco lo sera su imagen en H
+
+    por ejemplo un grafo ciclo de un cuadrado, y un grafo ciclo de cuadrado mas grande, donde aplicando la funcion biyectiva
+    a los vertices de del primero, dan los vertices del segundo
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
