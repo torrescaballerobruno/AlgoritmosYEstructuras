@@ -50,7 +50,7 @@ public class BuscaDatos {
         }*/
     }
 
-    private Stream<String> getLines(String file){
+    protected Stream<String> getLines(String file){
         Stream<String> stream = new ArrayList<String>().stream();
         try{
             stream = Files.lines(Paths.get(file));
